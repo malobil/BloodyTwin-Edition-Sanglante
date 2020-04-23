@@ -16,11 +16,16 @@ public class RoomJoiner : MonoBehaviourPunCallbacks
 
     private List<RoomUI> allRoomInfos = new List<RoomUI>();
 
-    public void CreateARoom()
+    public void OnClick_CreateARoom()
     {
         RoomOptions options = new RoomOptions();
         options.MaxPlayers = 4;
         PhotonNetwork.JoinOrCreateRoom(roomName.text, options, TypedLobby.Default);
+    }
+
+    public void OnClick_ChangeNickname(TextMeshProUGUI newNickName)
+    {
+        PhotonNetwork.NickName = newNickName.text;
     }
 
     public override void OnCreatedRoom()
