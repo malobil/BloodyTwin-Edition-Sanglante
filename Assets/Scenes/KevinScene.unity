@@ -476,6 +476,30 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1652402203, guid: e7244fc640b1d2140a5a88e2e99b6425, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652402203, guid: e7244fc640b1d2140a5a88e2e99b6425, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652402203, guid: e7244fc640b1d2140a5a88e2e99b6425, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652402203, guid: e7244fc640b1d2140a5a88e2e99b6425, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1054224108}
+    - target: {fileID: 1652402203, guid: e7244fc640b1d2140a5a88e2e99b6425, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick_LeaveRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652402203, guid: e7244fc640b1d2140a5a88e2e99b6425, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3175665920058259756, guid: e7244fc640b1d2140a5a88e2e99b6425,
         type: 3}
       propertyPath: m_AnchorMax.x
