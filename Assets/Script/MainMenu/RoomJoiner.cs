@@ -1,34 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class MainMenuManager : MonoBehaviourPunCallbacks
+public class RoomJoiner : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private TextMeshProUGUI roomName;
     [SerializeField]
-    private RoomUI roomUIPrefab ;
+    private RoomUI roomUIPrefab;
     [SerializeField]
     private Transform roomUIParent;
 
     private List<RoomUI> allRoomInfos = new List<RoomUI>();
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void CreateARoom()
     {
@@ -41,13 +27,22 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
     {
         base.OnCreatedRoom();
         Debug.Log("Room created");
-      
+        MainMenuManager.Singleton.ShowRoomUI();
+        MainMenuManager.Singleton.HideRoomCreationUI();
     }
+
+    public override void OnJoinedRoom()
+    {
+        base.OnJoinedRoom();
+        MainMenuManager.Singleton.ShowRoomUI();
+        MainMenuManager.Singleton.HideRoomCreationUI();
+
+    }
+
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        
-       foreach(RoomInfo infos in roomList)
+        foreach (RoomInfo infos in roomList)
         {
             int index = allRoomInfos.FindIndex(x => x.GetRoomInfo().Name == infos.Name);
             Debug.Log(infos.Name);
