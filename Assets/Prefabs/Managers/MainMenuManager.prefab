@@ -462,9 +462,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &610523812
 CanvasRenderer:
@@ -843,7 +843,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1228999172
 RectTransform:
   m_ObjectHideFlags: 0
@@ -960,12 +960,12 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OnClick_ChangeNickname
-        m_Mode: 2
+      - m_Target: {fileID: 1226545884853936523}
+        m_MethodName: ChangePlayerNickName
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1750857617}
-          m_ObjectArgumentAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1146,7 +1146,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2552,9 +2552,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomCreation:
     m_RoomNamingUI: {fileID: 3478850010109863616}
+    m_PlayerNickNameText: {fileID: 1750857617}
     m_RoompPreviewPrefab: {fileID: 5840245448698732637, guid: 90e44ba6eff981a4795630e57819134b,
       type: 3}
     m_RoompPreviewParent: {fileID: 2563236976424207892}
+  inRoom:
+    m_RoomNameUI: {fileID: 0}
+    m_PlayerPreviewPrefab: {fileID: -6707085081936930220, guid: ea97d0f0aa802b7498ddcd373a60cb40,
+      type: 3}
+    m_PlayerPreviewParent: {fileID: 568566746}
   m_RoomUI: {fileID: 563503870}
   m_RoomListUI: {fileID: 3478850010280714491}
 --- !u!1 &3478850011182664231

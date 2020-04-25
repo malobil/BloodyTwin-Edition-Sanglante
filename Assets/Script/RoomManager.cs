@@ -120,6 +120,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     #region Player
 
+    public void ChangePlayerNickName()
+    {
+        NetworkManager.Singleton.ChangePlayerNickName(roomCreation.m_PlayerNickNameText.text);
+    }
+
     void ShowPlayer(Player playerToShow)
     {
         PlayerPreview newPreview = Instantiate(inRoom.m_PlayerPreviewPrefab, inRoom.m_PlayerPreviewParent);
@@ -145,6 +150,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 public class RoomCreationUI
 {
     public TextMeshProUGUI m_RoomNamingUI;
+    public TextMeshProUGUI m_PlayerNickNameText;
     public RoomPreview m_RoompPreviewPrefab;
     public Transform m_RoompPreviewParent;
 }

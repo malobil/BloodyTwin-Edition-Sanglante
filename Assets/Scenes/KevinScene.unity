@@ -242,6 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d42459ae2288ee46810cb0a18e76c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerVersion: 0.0.1
 --- !u!4 &826103169
 Transform:
   m_ObjectHideFlags: 0
@@ -339,12 +340,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!224 &1342303890 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 568566746, guid: e7244fc640b1d2140a5a88e2e99b6425,
-    type: 3}
-  m_PrefabInstance: {fileID: 3478850010671218810}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3478850010671218810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -352,41 +347,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 563503870, guid: e7244fc640b1d2140a5a88e2e99b6425, type: 3}
+    - target: {fileID: 1228999171, guid: e7244fc640b1d2140a5a88e2e99b6425, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 610523809, guid: e7244fc640b1d2140a5a88e2e99b6425, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 610523809, guid: e7244fc640b1d2140a5a88e2e99b6425, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 610523809, guid: e7244fc640b1d2140a5a88e2e99b6425, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1636088602, guid: e7244fc640b1d2140a5a88e2e99b6425, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1636088602, guid: e7244fc640b1d2140a5a88e2e99b6425, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1226545884853936523, guid: e7244fc640b1d2140a5a88e2e99b6425,
-        type: 3}
-      propertyPath: inRoom.m_PlayerPreviewParent
-      value: 
-      objectReference: {fileID: 1342303890}
-    - target: {fileID: 1226545884853936523, guid: e7244fc640b1d2140a5a88e2e99b6425,
-        type: 3}
-      propertyPath: inRoom.m_PlayerPreviewPrefab
-      value: 
-      objectReference: {fileID: -6707085081936930220, guid: ea97d0f0aa802b7498ddcd373a60cb40,
-        type: 3}
     - target: {fileID: 3175665920058259756, guid: e7244fc640b1d2140a5a88e2e99b6425,
         type: 3}
       propertyPath: m_AnchorMax.x
