@@ -213,7 +213,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 563503871}
-  - component: {fileID: 1054224108}
   m_Layer: 5
   m_Name: RoomUI
   m_TagString: Untagged
@@ -244,22 +243,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1054224108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 563503870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 704af71927b745245a56f01fe9ae1415, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roomName: {fileID: 1048429823}
-  playerUIPrefab: {fileID: 8954266788306005725, guid: ebdac61175f97714587603dde995c4bc,
-    type: 3}
-  playerUIParent: {fileID: 568566746}
 --- !u!1 &568566745
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,7 +843,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1228999172
 RectTransform:
   m_ObjectHideFlags: 0
@@ -977,7 +960,7 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3478850010671218814}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClick_ChangeNickname
         m_Mode: 2
         m_Arguments:
@@ -1321,8 +1304,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1054224108}
-        m_MethodName: OnClick_LeaveRoom
+      - m_Target: {fileID: 1226545884853936523}
+        m_MethodName: LeaveRoom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1806,7 +1789,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3478850010280714488}
-  - component: {fileID: 3478850010671218814}
   m_Layer: 5
   m_Name: RoomCreationUI
   m_TagString: Untagged
@@ -1838,22 +1820,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3478850010671218814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3478850010280714491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 255e9606cffacb1458d06cf5027a4177, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roomName: {fileID: 3478850010109863616}
-  roomUIPrefab: {fileID: -5502624347507251832, guid: 90e44ba6eff981a4795630e57819134b,
-    type: 3}
-  roomUIParent: {fileID: 2563236976424207892}
 --- !u!1 &3478850010413749743
 GameObject:
   m_ObjectHideFlags: 0
@@ -2172,8 +2138,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3478850010671218814}
-        m_MethodName: OnClick_CreateARoom
+      - m_Target: {fileID: 1226545884853936523}
+        m_MethodName: CreateRoom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2482,7 +2448,7 @@ GameObject:
   - component: {fileID: 3478850011137512742}
   - component: {fileID: 3478850011137512737}
   - component: {fileID: 3478850011137512736}
-  - component: {fileID: 578445856}
+  - component: {fileID: 1226545884853936523}
   m_Layer: 5
   m_Name: MainMenuManager
   m_TagString: Untagged
@@ -2572,7 +2538,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &578445856
+--- !u!114 &1226545884853936523
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2581,11 +2547,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3478850011137512739}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15e47952105f82245b12d096073a506b, type: 3}
+  m_Script: {fileID: 11500000, guid: 3714d595f4a33ad4683a360beefbe877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RoomCreationUI: {fileID: 3478850010280714491}
+  roomCreation:
+    m_RoomNamingUI: {fileID: 3478850010109863616}
+    m_RoompPreviewPrefab: {fileID: 5840245448698732637, guid: 90e44ba6eff981a4795630e57819134b,
+      type: 3}
+    m_RoompPreviewParent: {fileID: 2563236976424207892}
   m_RoomUI: {fileID: 563503870}
+  m_RoomListUI: {fileID: 3478850010280714491}
 --- !u!1 &3478850011182664231
 GameObject:
   m_ObjectHideFlags: 0
