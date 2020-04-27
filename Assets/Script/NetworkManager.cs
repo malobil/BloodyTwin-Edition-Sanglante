@@ -25,14 +25,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        playerNickName = "Player" + Random.Range(0, 9999);
         ConnectPlayer();
     }
 
     void ConnectPlayer()
     {
+        playerNickName = "Player" + Random.Range(0, 9999);
         PhotonNetwork.GameVersion = playerVersion;
         PhotonNetwork.NickName = playerNickName;
+        PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.ConnectUsingSettings();
     }
 

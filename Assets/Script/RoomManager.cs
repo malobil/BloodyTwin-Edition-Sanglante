@@ -21,6 +21,18 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public override void OnCreatedRoom()
     {
         Debug.Log("Room created");
+        GameObjectUtility.ShowGameObject(inRoom.m_LaunchButton);
+    }
+
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        base.OnMasterClientSwitched(newMasterClient);
+        Debug.Log("New master : " + newMasterClient.NickName);
+
+        if(newMasterClient == PhotonNetwork.LocalPlayer)
+        {
+            GameObjectUtility.ShowGameObject(inRoom.m_LaunchButton);
+        }
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -69,6 +81,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         GameObjectUtility.HideGameObject(m_RoomUI);
         GameObjectUtility.ShowGameObject(m_RoomListUI);
         TransformUtility.DestroyChildren(inRoom.m_PlayerPreviewParent);
+        GameObjectUtility.HideGameObject(inRoom.m_LaunchButton);
         existingPlayers.Clear();
     }
 
@@ -118,7 +131,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     #endregion
 
-    #region Player
+    #region InRoom
 
     public void ChangePlayerNickName()
     {
@@ -144,6 +157,17 @@ public class RoomManager : MonoBehaviourPunCallbacks
     }
 
     #endregion
+
+    public void LaunchGame()
+    {
+        if(PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            PhotonNetwork.CurrentRoom.IsVisible = false;
+            PhotonNetwork.LoadLevel(1);
+        }
+       
+    }
 }
 
 [System.Serializable]
@@ -161,4 +185,5 @@ public class RoomUI
     public TextMeshProUGUI m_RoomNameUI;
     public PlayerPreview m_PlayerPreviewPrefab;
     public Transform m_PlayerPreviewParent;
+    public GameObject m_LaunchButton;
 }
