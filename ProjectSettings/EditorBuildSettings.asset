@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/KevinGameScene.unity
     guid: f9f9aa320c5fbce4896cf73b9955560b
+  - enabled: 1
+    path: Assets/Scenes/ArthurScene.unity
+    guid: fac21303be1d695409e47e58aa6b48d8
   m_configObjects: {}
