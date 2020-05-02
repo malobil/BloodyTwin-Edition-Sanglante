@@ -5,12 +5,10 @@ using Photon.Realtime;
 using Photon.Pun;
 using TMPro;
 
-public class PlayerPreview : MonoBehaviour
+public class PlayerPreview : MonoBehaviourPunCallbacks
 {
-    private TextMeshProUGUI textComp
-    {
-        get { return GetComponent<TextMeshProUGUI>(); }
-    }
+    [SerializeField] private TextMeshProUGUI textComp;
+
 
     private Player previewedPlayer;
 
@@ -19,6 +17,7 @@ public class PlayerPreview : MonoBehaviour
         previewedPlayer = player;
         textComp.text = player.NickName;
     }
+
 
     public Player GetPlayerInfo()
     {

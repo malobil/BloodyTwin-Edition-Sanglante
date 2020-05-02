@@ -9,12 +9,19 @@ public class RoomManager : MonoBehaviourPunCallbacks
 {
     public RoomCreationUI roomCreation;
     public RoomUI inRoom;
+
+    public SurvivorsUI survivorUI ;
+    public SpectatorsUI spectsUI ;
+    public KillerUI killerUI ;
+    public GhostUI ghostUI ;
+
     [SerializeField] private GameObject m_RoomUI ;
     [SerializeField] private GameObject m_RoomListUI ;
 
     private List<RoomPreview> existingRooms = new List<RoomPreview>();
     private List<PlayerPreview> existingPlayers = new List<PlayerPreview>();
 
+    private ExitGames.Client.Photon.Hashtable playerRole = new ExitGames.Client.Photon.Hashtable();
 
     #region Photon callbacks
 
@@ -32,6 +39,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
         if(newMasterClient == PhotonNetwork.LocalPlayer)
         {
             GameObjectUtility.ShowGameObject(inRoom.m_LaunchButton);
+        }
+        else if(newMasterClient != PhotonNetwork.LocalPlayer)
+        {
+            GameObjectUtility.HideGameObject(inRoom.m_LaunchButton);
         }
     }
 
@@ -65,14 +76,18 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Room joined");
         existingRooms.Clear();
-        TransformUtility.DestroyChildren(roomCreation.m_RoompPreviewParent);
         GameObjectUtility.ShowGameObject(m_RoomUI);
         GameObjectUtility.HideGameObject(m_RoomListUI);
 
-        foreach(KeyValuePair<int,Player> inRoomPlayer in PhotonNetwork.CurrentRoom.Players)
+        JoinSpectators();
+
+        foreach (KeyValuePair<int,Player> players in PhotonNetwork.CurrentRoom.Players)
         {
-            ShowPlayer(inRoomPlayer.Value);
+            SetupNewPlayer(players.Value);
+            ShowPlayerRole(players.Value,(string)players.Value.CustomProperties["Role"]);
         }
+
+       
     }
 
     public override void OnLeftRoom()
@@ -80,21 +95,35 @@ public class RoomManager : MonoBehaviourPunCallbacks
         Debug.Log("Room leaved");
         GameObjectUtility.HideGameObject(m_RoomUI);
         GameObjectUtility.ShowGameObject(m_RoomListUI);
-        TransformUtility.DestroyChildren(inRoom.m_PlayerPreviewParent);
         GameObjectUtility.HideGameObject(inRoom.m_LaunchButton);
+        TransformUtility.DestroyChildren(survivorUI.m_UIParent);
+        TransformUtility.DestroyChildren(killerUI.m_UIParent);
+        TransformUtility.DestroyChildren(ghostUI.m_UIParent);
+        TransformUtility.DestroyChildren(spectsUI.m_UIParent);
         existingPlayers.Clear();
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        base.OnPlayerEnteredRoom(newPlayer);
-        ShowPlayer(newPlayer);
+        SetupNewPlayer(newPlayer);
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         base.OnPlayerLeftRoom(otherPlayer);
         HidePlayer(otherPlayer);
+    }
+
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
+    {
+        if (targetPlayer != null)
+        {
+            if (changedProps.ContainsKey("Role"))
+            {
+                ShowPlayerRole(targetPlayer,(string)changedProps["Role"]);
+            }
+        }
+
     }
 
     #endregion
@@ -108,6 +137,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
 
         RoomOptions roomOpt = new RoomOptions();
+        roomOpt.BroadcastPropsChangeToAll = true;
         roomOpt.MaxPlayers = 4;
         roomOpt.IsOpen = true;
         roomOpt.IsVisible = true;
@@ -133,16 +163,92 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     #region InRoom
 
-    public void ChangePlayerNickName()
+    public void JoinSpectators()
     {
-        NetworkManager.Singleton.ChangePlayerNickName(roomCreation.m_PlayerNickNameText.text);
+        playerRole["Role"] = "Spectator";
+        PhotonNetwork.SetPlayerCustomProperties(playerRole);
     }
 
-    void ShowPlayer(Player playerToShow)
+    public void JoinKiller()
     {
-        PlayerPreview newPreview = Instantiate(inRoom.m_PlayerPreviewPrefab, inRoom.m_PlayerPreviewParent);
-        newPreview.SetupPlayerInfos(playerToShow);
-        existingPlayers.Add(newPreview);
+        foreach (KeyValuePair<int, Player> players in PhotonNetwork.CurrentRoom.Players)
+        {
+            if((string)players.Value.CustomProperties["Role"] == "Killer")
+            {
+                return;
+            }
+        }
+
+        playerRole["Role"] = "Killer";
+        PhotonNetwork.SetPlayerCustomProperties(playerRole);
+    }
+
+    public void JoinGhost()
+    {
+        foreach (KeyValuePair<int, Player> players in PhotonNetwork.CurrentRoom.Players)
+        {
+            if ((string)players.Value.CustomProperties["Role"] == "Ghost")
+            {
+                return;
+            }
+        }
+
+        playerRole["Role"] = "Ghost";
+        PhotonNetwork.SetPlayerCustomProperties(playerRole);
+    }
+
+    public void JoinSurvivor()
+    {
+        int survivorCount = 0;
+        foreach (KeyValuePair<int, Player> players in PhotonNetwork.CurrentRoom.Players)
+        {
+            if ((string)players.Value.CustomProperties["Role"] == "Killer")
+            {
+                survivorCount++;
+            }
+        }
+
+        if(survivorCount >= 2)
+        {
+            return;
+        }
+
+        playerRole["Role"] = "Survivor";
+        PhotonNetwork.SetPlayerCustomProperties(playerRole);
+    }
+
+    void SetupNewPlayer(Player playerToSetup)
+    {
+        PlayerPreview newPlayer = Instantiate(inRoom.m_PlayerPreviewPrefab,transform);
+        newPlayer.SetupPlayerInfos(playerToSetup);
+        existingPlayers.Add(newPlayer);
+    }
+
+    void ShowPlayerRole(Player playerToShow, string newRole)
+    {
+        int idx = existingPlayers.FindIndex(x => x.GetPlayerInfo() == playerToShow);
+
+        if(idx != -1)
+        {
+            PlayerPreview newPreview;
+            newPreview = existingPlayers[idx];
+
+            switch (newRole)
+            {
+                case "Spectator":
+                    newPreview.transform.SetParent(spectsUI.m_UIParent);
+                    break;
+                case "Killer":
+                    newPreview.transform.SetParent(killerUI.m_UIParent);
+                    break;
+                case "Ghost":
+                    newPreview.transform.SetParent(ghostUI.m_UIParent);
+                    break;
+                case "Survivor":
+                    newPreview.transform.SetParent(survivorUI.m_UIParent);
+                    break;
+            }
+        }
     }
 
     void HidePlayer(Player playerToHide)
@@ -166,7 +272,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
             PhotonNetwork.CurrentRoom.IsVisible = false;
             PhotonNetwork.LoadLevel(2);
         }
-       
     }
 }
 
@@ -184,6 +289,34 @@ public class RoomUI
 {
     public TextMeshProUGUI m_RoomNameUI;
     public PlayerPreview m_PlayerPreviewPrefab;
-    public Transform m_PlayerPreviewParent;
+    
     public GameObject m_LaunchButton;
+}
+
+[System.Serializable]
+public class KillerUI
+{
+    public GameObject m_JoinButton;
+    public Transform m_UIParent;
+}
+
+[System.Serializable]
+public class GhostUI
+{
+    public GameObject m_JoinButton;
+    public Transform m_UIParent;
+}
+
+[System.Serializable]
+public class SurvivorsUI
+{
+    public GameObject m_JoinButton;
+    public Transform m_UIParent;
+}
+
+[System.Serializable]
+public class SpectatorsUI
+{
+    public GameObject m_JoinButton;
+    public Transform m_UIParent;
 }
