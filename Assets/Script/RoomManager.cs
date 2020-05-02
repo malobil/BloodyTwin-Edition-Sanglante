@@ -75,6 +75,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("Room joined");
+        TransformUtility.DestroyChildren(roomCreation.m_RoompPreviewParent);
         existingRooms.Clear();
         GameObjectUtility.ShowGameObject(m_RoomUI);
         GameObjectUtility.HideGameObject(m_RoomListUI);
@@ -123,7 +124,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
                 ShowPlayerRole(targetPlayer,(string)changedProps["Role"]);
             }
         }
-
     }
 
     #endregion
