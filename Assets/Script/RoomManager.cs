@@ -9,7 +9,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 {
     public RoomCreationUI roomCreation;
     public RoomUI inRoom;
-
+    public int sceneToLoadIdx = 2;
     public SurvivorsUI survivorUI ;
     public SpectatorsUI spectsUI ;
     public KillerUI killerUI ;
@@ -270,7 +270,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.CurrentRoom.IsVisible = false;
-            PhotonNetwork.LoadLevel(2);
+            PhotonNetwork.LoadLevel(sceneToLoadIdx);
         }
     }
 }
