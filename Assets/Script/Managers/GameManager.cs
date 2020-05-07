@@ -22,12 +22,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         SpawnCharacter(PhotonNetwork.LocalPlayer);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void SpawnCharacter(Player playerInfo)
     {
         string role = (string)playerInfo.CustomProperties["Role"];
