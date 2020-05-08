@@ -18,10 +18,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject m_RoomUI ;
     [SerializeField] private GameObject m_RoomListUI ;
 
-    private List<RoomPreview> existingRooms = new List<RoomPreview>();
-    private List<PlayerPreview> existingPlayers = new List<PlayerPreview>();
+    private List<RoomPreview> existingRooms = new List<RoomPreview>() ;
+    private List<PlayerPreview> existingPlayers = new List<PlayerPreview>() ;
 
-    private ExitGames.Client.Photon.Hashtable playerRole = new ExitGames.Client.Photon.Hashtable();
+    private ExitGames.Client.Photon.Hashtable playerRole = new ExitGames.Client.Photon.Hashtable() ;
 
     #region Photon callbacks
 
