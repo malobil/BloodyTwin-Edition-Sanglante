@@ -7,4 +7,5 @@ public class CharactersData : ScriptableObject
 {
     public float MoveSpeed = 5f;
     public float CameraSensitivity = 5f;
+    public float range = 5f;
 }

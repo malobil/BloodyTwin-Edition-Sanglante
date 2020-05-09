@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: GhostDatas
   m_EditorClassIdentifier: 
   MoveSpeed: 5
-  CameraSensitivity: 5
+  CameraSensitivity: 10

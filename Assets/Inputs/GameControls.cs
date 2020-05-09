@@ -120,7 +120,15 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""name"": ""GoDown"",
                     ""type"": ""PassThrough"",
                     ""id"": ""388f1dca-3c65-4347-83b1-55f53b61d24b"",
-                    ""expectedControlType"": ""Digital"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Possess"",
+                    ""type"": ""Button"",
+                    ""id"": ""755bca78-7415-4661-ae7d-15efbc808b36"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -140,11 +148,22 @@ public class @GameControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e9a248e5-9b2b-4f0a-8e7e-9017c751f3fd"",
-                    ""path"": ""<Keyboard>/leftShift"",
+                    ""path"": ""<Keyboard>/leftAlt"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""GoDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""525ab667-a81f-4f41-bcf4-76db24f6e360"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Possess"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -161,6 +180,7 @@ public class @GameControls : IInputActionCollection, IDisposable
         m_Ghost = asset.FindActionMap("Ghost", throwIfNotFound: true);
         m_Ghost_GoUp = m_Ghost.FindAction("GoUp", throwIfNotFound: true);
         m_Ghost_GoDown = m_Ghost.FindAction("GoDown", throwIfNotFound: true);
+        m_Ghost_Possess = m_Ghost.FindAction("Possess", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -253,12 +273,14 @@ public class @GameControls : IInputActionCollection, IDisposable
     private IGhostActions m_GhostActionsCallbackInterface;
     private readonly InputAction m_Ghost_GoUp;
     private readonly InputAction m_Ghost_GoDown;
+    private readonly InputAction m_Ghost_Possess;
     public struct GhostActions
     {
         private @GameControls m_Wrapper;
         public GhostActions(@GameControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @GoUp => m_Wrapper.m_Ghost_GoUp;
         public InputAction @GoDown => m_Wrapper.m_Ghost_GoDown;
+        public InputAction @Possess => m_Wrapper.m_Ghost_Possess;
         public InputActionMap Get() { return m_Wrapper.m_Ghost; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -274,6 +296,9 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @GoDown.started -= m_Wrapper.m_GhostActionsCallbackInterface.OnGoDown;
                 @GoDown.performed -= m_Wrapper.m_GhostActionsCallbackInterface.OnGoDown;
                 @GoDown.canceled -= m_Wrapper.m_GhostActionsCallbackInterface.OnGoDown;
+                @Possess.started -= m_Wrapper.m_GhostActionsCallbackInterface.OnPossess;
+                @Possess.performed -= m_Wrapper.m_GhostActionsCallbackInterface.OnPossess;
+                @Possess.canceled -= m_Wrapper.m_GhostActionsCallbackInterface.OnPossess;
             }
             m_Wrapper.m_GhostActionsCallbackInterface = instance;
             if (instance != null)
@@ -284,6 +309,9 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @GoDown.started += instance.OnGoDown;
                 @GoDown.performed += instance.OnGoDown;
                 @GoDown.canceled += instance.OnGoDown;
+                @Possess.started += instance.OnPossess;
+                @Possess.performed += instance.OnPossess;
+                @Possess.canceled += instance.OnPossess;
             }
         }
     }
@@ -297,5 +325,6 @@ public class @GameControls : IInputActionCollection, IDisposable
     {
         void OnGoUp(InputAction.CallbackContext context);
         void OnGoDown(InputAction.CallbackContext context);
+        void OnPossess(InputAction.CallbackContext context);
     }
 }

@@ -18,4 +18,23 @@ public static class TransformUtility
             }
         }
     }
+
+    public static Transform GetNeareastObject(List<Transform> objectList, Transform startPoint, float maxRange = 9999f)
+    {
+        float neareastDist = 9999f;
+        Transform nearestObject = null ;
+
+        for(int i = 0; i < objectList.Count; i++)
+        {
+            float newDist = Vector3.Distance(objectList[i].position, startPoint.position);
+
+            if (newDist < neareastDist && newDist <= maxRange)
+            {
+                nearestObject = objectList[i];
+                neareastDist = newDist;
+            }
+        }
+
+        return nearestObject;
+    }
 }
