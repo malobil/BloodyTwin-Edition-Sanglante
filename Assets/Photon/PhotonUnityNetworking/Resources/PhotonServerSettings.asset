@@ -37,6 +37,11 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - RPC_ChangeReadyState
+  - RPC_SetPhysic
+  - RPC_Possess
+  - RPC_UnPossess
+  - RPC_ShowMe
+  - RPC_HideMe
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

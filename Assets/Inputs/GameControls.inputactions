@@ -107,7 +107,15 @@
                     "name": "GoDown",
                     "type": "PassThrough",
                     "id": "388f1dca-3c65-4347-83b1-55f53b61d24b",
-                    "expectedControlType": "Digital",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Possess",
+                    "type": "Button",
+                    "id": "755bca78-7415-4661-ae7d-15efbc808b36",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 }
@@ -127,11 +135,22 @@
                 {
                     "name": "",
                     "id": "e9a248e5-9b2b-4f0a-8e7e-9017c751f3fd",
-                    "path": "<Keyboard>/leftShift",
+                    "path": "<Keyboard>/leftAlt",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "GoDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "525ab667-a81f-4f41-bcf4-76db24f6e360",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Possess",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
