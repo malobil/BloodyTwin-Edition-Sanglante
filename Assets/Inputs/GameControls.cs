@@ -131,6 +131,14 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Eject"",
+                    ""type"": ""Button"",
+                    ""id"": ""599b32cd-74f6-476b-8add-76ad33599e45"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -166,6 +174,17 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""action"": ""Possess"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""286b10c6-fd30-4611-b7d3-c1cb477a6c32"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eject"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -181,6 +200,7 @@ public class @GameControls : IInputActionCollection, IDisposable
         m_Ghost_GoUp = m_Ghost.FindAction("GoUp", throwIfNotFound: true);
         m_Ghost_GoDown = m_Ghost.FindAction("GoDown", throwIfNotFound: true);
         m_Ghost_Possess = m_Ghost.FindAction("Possess", throwIfNotFound: true);
+        m_Ghost_Eject = m_Ghost.FindAction("Eject", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -274,6 +294,7 @@ public class @GameControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Ghost_GoUp;
     private readonly InputAction m_Ghost_GoDown;
     private readonly InputAction m_Ghost_Possess;
+    private readonly InputAction m_Ghost_Eject;
     public struct GhostActions
     {
         private @GameControls m_Wrapper;
@@ -281,6 +302,7 @@ public class @GameControls : IInputActionCollection, IDisposable
         public InputAction @GoUp => m_Wrapper.m_Ghost_GoUp;
         public InputAction @GoDown => m_Wrapper.m_Ghost_GoDown;
         public InputAction @Possess => m_Wrapper.m_Ghost_Possess;
+        public InputAction @Eject => m_Wrapper.m_Ghost_Eject;
         public InputActionMap Get() { return m_Wrapper.m_Ghost; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -299,6 +321,9 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @Possess.started -= m_Wrapper.m_GhostActionsCallbackInterface.OnPossess;
                 @Possess.performed -= m_Wrapper.m_GhostActionsCallbackInterface.OnPossess;
                 @Possess.canceled -= m_Wrapper.m_GhostActionsCallbackInterface.OnPossess;
+                @Eject.started -= m_Wrapper.m_GhostActionsCallbackInterface.OnEject;
+                @Eject.performed -= m_Wrapper.m_GhostActionsCallbackInterface.OnEject;
+                @Eject.canceled -= m_Wrapper.m_GhostActionsCallbackInterface.OnEject;
             }
             m_Wrapper.m_GhostActionsCallbackInterface = instance;
             if (instance != null)
@@ -312,6 +337,9 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @Possess.started += instance.OnPossess;
                 @Possess.performed += instance.OnPossess;
                 @Possess.canceled += instance.OnPossess;
+                @Eject.started += instance.OnEject;
+                @Eject.performed += instance.OnEject;
+                @Eject.canceled += instance.OnEject;
             }
         }
     }
@@ -326,5 +354,6 @@ public class @GameControls : IInputActionCollection, IDisposable
         void OnGoUp(InputAction.CallbackContext context);
         void OnGoDown(InputAction.CallbackContext context);
         void OnPossess(InputAction.CallbackContext context);
+        void OnEject(InputAction.CallbackContext context);
     }
 }

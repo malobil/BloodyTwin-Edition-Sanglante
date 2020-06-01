@@ -42,7 +42,17 @@ public abstract class Character : MonoBehaviourPun
     public virtual void SetupControls()
     {
         controls = new GameControls();
+        EnableControls();
+    }
+
+    public virtual void EnableControls()
+    {
         controls.Enable();
+    }
+
+    public virtual void DisableControls()
+    {
+        controls.Disable();
     }
 
     public virtual void Move()
@@ -77,5 +87,10 @@ public abstract class Character : MonoBehaviourPun
         {
             this.enabled = false;
         }
+    }
+
+    public CharactersData GetDatas()
+    {
+        return Cdatas;
     }
 }

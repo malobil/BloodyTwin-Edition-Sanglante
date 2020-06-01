@@ -30,7 +30,6 @@ public class Ghost : Character
         for(int i = 0; i < allFurnitures.Length; i++)
         {
             furnituresTransform.Add(allFurnitures[i].transform);
-            Debug.Log(furnituresTransform[i]);
         }
 
         Transform nearestFurnitures = TransformUtility.GetNeareastObject(furnituresTransform, transform, Cdatas.range);
@@ -38,10 +37,10 @@ public class Ghost : Character
         if (nearestFurnitures != null)
         {
             transform.position = nearestFurnitures.position;
-            transform.SetParent(nearestFurnitures);
             GameObjectUtility.HideGameObject(gameObject);
             nearestFurnitures.GetComponent<Furnitures>().Possess(this, m_Camera);
             photonView.RPC("RPC_HideMe", RpcTarget.All);
+            DisableControls();
         }
     }
 
@@ -57,13 +56,14 @@ public class Ghost : Character
         GameObjectUtility.HideGameObject(gameObject);
     }
 
-    public void UnPossess()
+    public void UnPossess(Furnitures unpossedObj)
     {
-        transform.SetParent(null);
+        transform.position = unpossedObj.transform.position ;
+        transform.rotation = unpossedObj.transform.rotation;
+        m_Camera.position = transform.position;
         m_Camera.SetParent(transform);
-        m_Camera.transform.position = transform.position;
-        m_Camera.localRotation = Quaternion.Euler(0, 0, 0);
         GameObjectUtility.ShowGameObject(gameObject);
         photonView.RPC("RPC_ShowMe", RpcTarget.All);
+        EnableControls();
     }
 }

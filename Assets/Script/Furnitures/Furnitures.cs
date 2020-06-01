@@ -11,6 +11,8 @@ public abstract class Furnitures : MonoBehaviourPun
     protected Transform m_Camera;
     protected Ghost associateGhost;
 
+    protected bool canMove = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,13 +41,14 @@ public abstract class Furnitures : MonoBehaviourPun
     {
         controls = new GameControls();
         controls.Ghost.Possess.performed += ctx => UnPossess();
+        controls.Ghost.Eject.performed += ctx => Eject();
     }
 
     public virtual void Move()
     {
         Vector2 inputs = controls.General.Move.ReadValue<Vector2>();
         Vector3 movement = new Vector3(inputs.x, Rb.velocity.y, inputs.y);
-        movement = (movement.z * transform.forward * 5f) + (movement.x * transform.right * 5f);
+        movement = (movement.z * transform.forward * associateGhost.GetDatas().MoveSpeed) + (movement.x * transform.right * associateGhost.GetDatas().MoveSpeed);
         movement.y = controls.Ghost.GoUp.ReadValue<float>() - controls.Ghost.GoDown.ReadValue<float>();
         movement.y *= 5f;
         Rb.velocity = movement;
@@ -53,8 +56,8 @@ public abstract class Furnitures : MonoBehaviourPun
 
     public virtual void CameraControl()
     {
-        float mouseX = controls.General.MouseDelta.ReadValue<Vector2>().x * 10f * Time.deltaTime;
-        float mouseY = controls.General.MouseDelta.ReadValue<Vector2>().y * 10f * Time.deltaTime;
+        float mouseX = controls.General.MouseDelta.ReadValue<Vector2>().x * associateGhost.GetDatas().CameraSensitivity * Time.deltaTime;
+        float mouseY = controls.General.MouseDelta.ReadValue<Vector2>().y * associateGhost.GetDatas().CameraSensitivity * Time.deltaTime;
         transform.Rotate(Vector3.up * mouseX);
 
         xCameraRotation -= mouseY;
@@ -66,6 +69,8 @@ public abstract class Furnitures : MonoBehaviourPun
     public virtual void Possess(Ghost ghost,Transform newCamera)
     {
         photonView.RequestOwnership();
+        transform.rotation = ghost.transform.rotation;
+        canMove = true;
         associateGhost = ghost ;
         m_Camera = newCamera;
         m_Camera.position = transform.position;
@@ -75,11 +80,18 @@ public abstract class Furnitures : MonoBehaviourPun
         photonView.RPC("RPC_Possess", RpcTarget.All);
     }
 
+    public virtual void Eject()
+    {
+        canMove = false;
+        Rb.AddForce(m_Camera.forward * associateGhost.GetDatas().ejectionForce,ForceMode.Impulse);
+        Debug.Log("Eject");
+        UnPossess();
+    }
+
     [PunRPC]
     public virtual void RPC_Possess()
     {
         Rb.useGravity = false;
-        Rb.drag = 9999f;
         Rb.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
@@ -87,13 +99,12 @@ public abstract class Furnitures : MonoBehaviourPun
     public virtual void RPC_UnPossess()
     {
         Rb.useGravity = true;
-        Rb.drag = 0f;
         Rb.constraints = RigidbodyConstraints.None;
     }
 
     public virtual void UnPossess()
     {
-        associateGhost.UnPossess();
+        associateGhost.UnPossess(this);
         photonView.RPC("RPC_UnPossess", RpcTarget.All);
         controls.Disable();
         this.enabled = false;
