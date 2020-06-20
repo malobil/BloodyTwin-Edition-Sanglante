@@ -174,6 +174,52 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Survivor",
+            "id": "10ef5e94-5f61-446c-a723-a109d7a2c6f8",
+            "actions": [
+                {
+                    "name": "ToggleLightTorch",
+                    "type": "Button",
+                    "id": "4fa938a9-1848-48c1-8444-542da435faf0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "ChargeUpLightTorch",
+                    "type": "Value",
+                    "id": "26d2fb7a-5078-4613-b8ce-457b68cca9f3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2e2dce6e-4dfa-4247-a2d7-dfad51253f81",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleLightTorch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d0890926-661e-4d30-932a-7e8b83c12779",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChargeUpLightTorch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

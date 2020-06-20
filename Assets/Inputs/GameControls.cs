@@ -187,6 +187,52 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Survivor"",
+            ""id"": ""10ef5e94-5f61-446c-a723-a109d7a2c6f8"",
+            ""actions"": [
+                {
+                    ""name"": ""ToggleLightTorch"",
+                    ""type"": ""Button"",
+                    ""id"": ""4fa938a9-1848-48c1-8444-542da435faf0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ChargeUpLightTorch"",
+                    ""type"": ""Value"",
+                    ""id"": ""26d2fb7a-5078-4613-b8ce-457b68cca9f3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2e2dce6e-4dfa-4247-a2d7-dfad51253f81"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleLightTorch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0890926-661e-4d30-932a-7e8b83c12779"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChargeUpLightTorch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -201,6 +247,10 @@ public class @GameControls : IInputActionCollection, IDisposable
         m_Ghost_GoDown = m_Ghost.FindAction("GoDown", throwIfNotFound: true);
         m_Ghost_Possess = m_Ghost.FindAction("Possess", throwIfNotFound: true);
         m_Ghost_Eject = m_Ghost.FindAction("Eject", throwIfNotFound: true);
+        // Survivor
+        m_Survivor = asset.FindActionMap("Survivor", throwIfNotFound: true);
+        m_Survivor_ToggleLightTorch = m_Survivor.FindAction("ToggleLightTorch", throwIfNotFound: true);
+        m_Survivor_ChargeUpLightTorch = m_Survivor.FindAction("ChargeUpLightTorch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -344,6 +394,47 @@ public class @GameControls : IInputActionCollection, IDisposable
         }
     }
     public GhostActions @Ghost => new GhostActions(this);
+
+    // Survivor
+    private readonly InputActionMap m_Survivor;
+    private ISurvivorActions m_SurvivorActionsCallbackInterface;
+    private readonly InputAction m_Survivor_ToggleLightTorch;
+    private readonly InputAction m_Survivor_ChargeUpLightTorch;
+    public struct SurvivorActions
+    {
+        private @GameControls m_Wrapper;
+        public SurvivorActions(@GameControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ToggleLightTorch => m_Wrapper.m_Survivor_ToggleLightTorch;
+        public InputAction @ChargeUpLightTorch => m_Wrapper.m_Survivor_ChargeUpLightTorch;
+        public InputActionMap Get() { return m_Wrapper.m_Survivor; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SurvivorActions set) { return set.Get(); }
+        public void SetCallbacks(ISurvivorActions instance)
+        {
+            if (m_Wrapper.m_SurvivorActionsCallbackInterface != null)
+            {
+                @ToggleLightTorch.started -= m_Wrapper.m_SurvivorActionsCallbackInterface.OnToggleLightTorch;
+                @ToggleLightTorch.performed -= m_Wrapper.m_SurvivorActionsCallbackInterface.OnToggleLightTorch;
+                @ToggleLightTorch.canceled -= m_Wrapper.m_SurvivorActionsCallbackInterface.OnToggleLightTorch;
+                @ChargeUpLightTorch.started -= m_Wrapper.m_SurvivorActionsCallbackInterface.OnChargeUpLightTorch;
+                @ChargeUpLightTorch.performed -= m_Wrapper.m_SurvivorActionsCallbackInterface.OnChargeUpLightTorch;
+                @ChargeUpLightTorch.canceled -= m_Wrapper.m_SurvivorActionsCallbackInterface.OnChargeUpLightTorch;
+            }
+            m_Wrapper.m_SurvivorActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ToggleLightTorch.started += instance.OnToggleLightTorch;
+                @ToggleLightTorch.performed += instance.OnToggleLightTorch;
+                @ToggleLightTorch.canceled += instance.OnToggleLightTorch;
+                @ChargeUpLightTorch.started += instance.OnChargeUpLightTorch;
+                @ChargeUpLightTorch.performed += instance.OnChargeUpLightTorch;
+                @ChargeUpLightTorch.canceled += instance.OnChargeUpLightTorch;
+            }
+        }
+    }
+    public SurvivorActions @Survivor => new SurvivorActions(this);
     public interface IGeneralActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -355,5 +446,10 @@ public class @GameControls : IInputActionCollection, IDisposable
         void OnGoDown(InputAction.CallbackContext context);
         void OnPossess(InputAction.CallbackContext context);
         void OnEject(InputAction.CallbackContext context);
+    }
+    public interface ISurvivorActions
+    {
+        void OnToggleLightTorch(InputAction.CallbackContext context);
+        void OnChargeUpLightTorch(InputAction.CallbackContext context);
     }
 }

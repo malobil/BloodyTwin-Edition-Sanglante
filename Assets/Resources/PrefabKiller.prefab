@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8836833336041678018
 Transform:
   m_ObjectHideFlags: 0
@@ -375,8 +375,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7462a165bc49fac47992c7e0f9e91f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cdatas: {fileID: 11400000, guid: ffc860cb0ad72674099088854bbb5ca5, type: 2}
+  Cdatas: {fileID: 11400000, guid: 688f972ecf43d234aaae26c828baf142, type: 2}
   m_Camera: {fileID: 8836833336041678018}
+  m_CameraComp: {fileID: 2907891868458701400}
 --- !u!114 &3353315202490161095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,7 +403,7 @@ MonoBehaviour:
     ExtrapolateNumberOfStoredPositions: 1
   m_RotationModel:
     SynchronizeEnabled: 1
-    InterpolateOption: 1
+    InterpolateOption: 2
     InterpolateRotateTowardsSpeed: 180
     InterpolateLerpSpeed: 5
   m_ScaleModel:

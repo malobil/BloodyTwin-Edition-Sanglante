@@ -10,7 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15c25a2d2a5442d40bb63b93c1fe6e6e, type: 3}
-  m_Name: SurvivorDatas
+  m_Name: Survivor_Classic
   m_EditorClassIdentifier: 
+  dataType: 0
   MoveSpeed: 5
-  CameraSensitivity: 10
+  CameraSensitivity: 5
+  range: 5
+  ejectionForce: 10
+  lightTorchBatteryTime: 10
