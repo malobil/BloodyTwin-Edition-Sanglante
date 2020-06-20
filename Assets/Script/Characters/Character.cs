@@ -2,6 +2,7 @@
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -9,6 +10,7 @@ public abstract class Character : MonoBehaviourPun
 {
     [SerializeField] protected CharactersData Cdatas;
     [SerializeField] protected Transform m_Camera;
+    [SerializeField] protected Camera m_CameraComp;
 
     protected GameControls controls;
     protected Rigidbody Rb { get { return GetComponent<Rigidbody>(); }}
@@ -80,11 +82,11 @@ public abstract class Character : MonoBehaviourPun
         if(photonView.IsMine)
         {
             associatePlayerInfo = PhotonNetwork.LocalPlayer ;
-            Debug.LogError(associatePlayerInfo.NickName);
-            GameObjectUtility.ShowGameObject(m_Camera.gameObject);
+            Debug.Log(associatePlayerInfo.NickName);
         }
         else
         {
+            m_CameraComp.enabled = false;
             this.enabled = false;
         }
     }
