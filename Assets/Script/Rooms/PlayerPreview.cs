@@ -7,7 +7,7 @@ using TMPro;
 
 public class PlayerPreview : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private TextMeshProUGUI textComp;
+    [SerializeField] private TextMeshProUGUI textComp = null;
 
 
     private Player previewedPlayer;

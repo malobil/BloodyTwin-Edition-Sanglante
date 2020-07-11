@@ -7,7 +7,7 @@ public enum CharacterType { Ghost, Killer, Survivor}
 [CreateAssetMenu(fileName = "New character datas", menuName = "Create new character datas")]
 public class CharactersData : ScriptableObject
 {
-    [SerializeField] private CharacterType dataType;
+    public CharacterType dataType;
 
     public float MoveSpeed = 5f;
     public float CameraSensitivity = 5f;

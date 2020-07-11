@@ -19,6 +19,26 @@ public static class TransformUtility
         }
     }
 
+    public static List<Transform> GetChilds(Transform parent, bool getChildsChild)
+    {
+        List<Transform> childList = new List<Transform>();
+
+        foreach(Transform child in parent)
+        {
+            childList.Add(child);
+
+            if(getChildsChild)
+            {
+                foreach(Transform childChilds in child)
+                {
+                    childList.Add(childChilds);
+                }
+            }
+        }
+
+        return childList;
+    }
+
     public static Transform GetNeareastObject(List<Transform> objectList, Transform startPoint, float maxRange = 9999f)
     {
         float neareastDist = 9999f;

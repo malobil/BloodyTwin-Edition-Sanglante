@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6907636820064941428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6907636820064941430}
+  - component: {fileID: 6907636820064941429}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6907636820064941430
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6907636820064941428}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6907636820064941429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6907636820064941428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb9b68a37624b04995f4b31544abf67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_KillerPrefab: {fileID: 6530267773522341862, guid: d79dae96594b31c4b8ca5dde499e713c,
+    type: 3}
+  m_GhostPrefab: {fileID: 6613289802481736031, guid: 0ba2650f28e875241baa8d30ff5256ce,
+    type: 3}
+  m_SurvivorOnePrefab: {fileID: 8490453812604947920, guid: 24f31035627ada34e99178c24b2e98fa,
+    type: 3}
+  m_SurvivorTwoPrefab: {fileID: 4011512126945584986, guid: 4943c755e6bd9194badba02944461696,
+    type: 3}
+  m_DollPrefab: {fileID: 8851934469262467200, guid: 845d743afebac41489a673a384885bc1,
+    type: 3}
+  m_DollSpawnPointParent: {fileID: 0}
+  m_SurvivorOneSpawnPoint: {fileID: 0}
+  m_SurvivorTwoSpawnPoint: {fileID: 0}
+  m_KillerSpawnPoint: {fileID: 0}
+  m_GhostSpawnPoint: {fileID: 0}

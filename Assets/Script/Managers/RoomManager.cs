@@ -15,8 +15,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public KillerUI killerUI ;
     public GhostUI ghostUI ;
 
-    [SerializeField] private GameObject m_RoomUI ;
-    [SerializeField] private GameObject m_RoomListUI ;
+    [SerializeField] private GameObject m_RoomUI = null ;
+    [SerializeField] private GameObject m_RoomListUI = null ;
 
     private List<RoomPreview> existingRooms = new List<RoomPreview>() ;
     private List<PlayerPreview> existingPlayers = new List<PlayerPreview>() ;

@@ -48,7 +48,10 @@ public class Survivor : Character
 
     void ChargeUpLightTorch()
     {
-
+        if(currentLightTorchBatteryTime < Cdatas.lightTorchBatteryTime)
+        {
+            currentLightTorchBatteryTime += Time.deltaTime;
+        }
     }
 
     void HandleLightTorch()
