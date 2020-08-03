@@ -81,7 +81,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5073943576231407657}
+  - {fileID: -3439663650644246725}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,8 +109,8 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7431623460775678444}
-  m_Mesh: {fileID: 4974313699735145862}
---- !u!43 &4974313699735145862
+  m_Mesh: {fileID: -7952951856235547724}
+--- !u!43 &-7952951856235547724
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -273,7 +273,7 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!21 &5073943576231407657
+--- !u!21 &-3439663650644246725
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -293,12 +293,12 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 6078573852366178536}
+        m_Texture: {fileID: 7003366124548115824}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors: []
---- !u!28 &6078573852366178536
+--- !u!28 &7003366124548115824
 Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
