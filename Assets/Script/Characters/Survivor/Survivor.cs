@@ -31,6 +31,7 @@ public class Survivor : Character
     {
         base.SetupControls();
         controls.Survivor.ToggleLightTorch.performed += ctx => HandleLightTorch();
+        controls.Survivor.Interact.performed += ctx => Interact();
     }
 
     void DecreaseLightTorchBattery()

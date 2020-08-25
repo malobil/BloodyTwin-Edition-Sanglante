@@ -104,6 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5568806652846748999}
   - component: {fileID: 2372061520327411051}
+  - component: {fileID: 4500073231770686867}
   m_Layer: 0
   m_Name: PrefabDoll
   m_TagString: Untagged
@@ -142,9 +143,21 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 0
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   ObservedComponents:
   - {fileID: 0}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &4500073231770686867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8851934469262467200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f7a51a80b5b7894d9e2c4f0e8f75a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

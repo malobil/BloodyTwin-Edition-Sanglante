@@ -2,7 +2,6 @@
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -75,6 +74,21 @@ public abstract class Character : MonoBehaviourPun
         xCameraRotation = Mathf.Clamp(xCameraRotation, -90f, 90f);
 
         m_Camera.localRotation = Quaternion.Euler(xCameraRotation, m_Camera.localRotation.y, m_Camera.localRotation.z);
+    }
+
+    public virtual void Interact()
+    {
+        RaycastHit hit;
+
+        if(Physics.Raycast(m_Camera.position,m_Camera.forward,out hit, Cdatas.range))
+        {
+            InteractableObject interactableHit = hit.transform.GetComponentInParent<InteractableObject>();
+
+            if (interactableHit != null)
+            {
+                interactableHit.OnInteract();
+            }
+        }
     }
 
     public virtual void SetupPlayerInfos()

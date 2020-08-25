@@ -4,8 +4,14 @@ using UnityEngine;
 using Photon.Realtime;
 using Photon.Pun;
 
-public class GameManager : MonoBehaviourPunCallbacks
+public class GameManager : MonoBehaviourPunCallbacks, IPunOwnershipCallbacks
 {
+    public static GameManager Instance 
+    { 
+        get ; 
+        private set; 
+    }
+
     [SerializeField] private GameObject m_KillerPrefab = null ;
     [SerializeField] private GameObject m_GhostPrefab = null ;
     [SerializeField] private GameObject m_SurvivorOnePrefab = null ;
@@ -18,11 +24,26 @@ public class GameManager : MonoBehaviourPunCallbacks
     [SerializeField] private Transform m_KillerSpawnPoint = null ;
     [SerializeField] private Transform m_GhostSpawnPoint = null;
 
-    [SerializeField] private int m_DollCount = 5;
+    [SerializeField] private int m_dollToSpawn = 5;
+
+    private int m_dollLeft = 0;
+
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        PhotonNetwork.AllocateViewID(photonView);
         SpawnDoll();
         SpawnCharacter(PhotonNetwork.LocalPlayer);
     }
@@ -60,7 +81,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         List<Transform> tempDollSpawnPoints = TransformUtility.GetChilds(m_DollSpawnPointParent,false) ;
 
-        for(int i = 0; i < m_DollCount; i++)
+        for(int i = 0; i < m_dollToSpawn; i++)
         {
             int rdmIdx = Random.Range(0, tempDollSpawnPoints.Count - 1);
 
@@ -71,12 +92,54 @@ public class GameManager : MonoBehaviourPunCallbacks
                 GameObjectUtility.HideGameObject(spawnedDoll);
             }
 
+            if (PhotonNetwork.LocalPlayer.IsMasterClient) //if is server 
+            {
+                photonView.RPC("RPC_AddDoll", RpcTarget.All);
+            }
+
             tempDollSpawnPoints.RemoveAt(rdmIdx);
         }
+    }
+
+    [PunRPC]
+    public void RPC_AddDoll()
+    {
+        m_dollLeft++;
+    }
+
+    [PunRPC]
+    public void RPC_RemoveDoll() //sync variable (server side)
+    {
+        m_dollLeft--;
+        Debug.LogError(m_dollLeft);
+    }
+
+    public void RemoveDoll()
+    {
+        photonView.RPC("RPC_RemoveDoll", RpcTarget.All);
     }
 
     public string GetCharacterRole(Player playerInfo)
     {
         return (string)playerInfo.CustomProperties["Role"];
+    }
+
+    public void RequestOwnership(Player playerRequest)
+    {
+        photonView.TransferOwnership(playerRequest);
+    }
+
+    public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
+    {
+        if (targetView != photonView)
+            return;
+
+        photonView.TransferOwnership(requestingPlayer);
+    }
+
+    public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
+    {
+        if (targetView != photonView)
+            return;
     }
 }
