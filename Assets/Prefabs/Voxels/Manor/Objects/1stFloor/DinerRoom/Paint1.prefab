@@ -50,7 +50,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1196585967600933334}
+  - {fileID: -7117557699923663527}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78,7 +78,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1317718860948448386}
-  m_Mesh: {fileID: 4296772142223851487}
+  m_Mesh: {fileID: 7650280995743655264}
 --- !u!1 &4649872474619499888
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +110,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &1196585967600933334
+--- !u!21 &-7117557699923663527
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -130,12 +130,12 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 3999536811293320489}
+        m_Texture: {fileID: 6722068682053923258}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors: []
---- !u!28 &3999536811293320489
+--- !u!28 &6722068682053923258
 Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,7 +176,7 @@ Texture2D:
     offset: 0
     size: 0
     path: 
---- !u!43 &4296772142223851487
+--- !u!43 &7650280995743655264
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
