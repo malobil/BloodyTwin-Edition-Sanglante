@@ -31,10 +31,10 @@ public abstract class Character : MonoBehaviourPun
 
 	public virtual void OnInit()
 	{
+		SetupPlayerInfos();
 		m_rbComp = GetComponent<Rigidbody>();
 		m_photonView = GetComponent<PhotonView>();
 		SetupControls();
-		SetupPlayerInfos();
 	}
 
 	public virtual void OnUpdate()
