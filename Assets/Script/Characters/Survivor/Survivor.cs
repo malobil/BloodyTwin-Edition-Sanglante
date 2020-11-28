@@ -72,6 +72,7 @@ public class Survivor : Character
             {
                 m_currentTorchLightBattery += Time.deltaTime * m_characterData.Survivor.TorchLightIncreaseRatio;
                 UIManager.Instance.UpdateUIFillAmount(UIType.Survivor, m_currentTorchLightBattery / m_characterData.Survivor.LightTorchBatteryTime);
+                m_canUseTorchLight = true;
             }
         }
     }
