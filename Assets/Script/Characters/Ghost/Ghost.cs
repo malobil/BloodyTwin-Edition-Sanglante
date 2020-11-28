@@ -9,17 +9,17 @@ public class Ghost : Character
     public override void SetupControls()
     {
         base.SetupControls();
-        controls.Ghost.Possess.performed += ctx => Possess();
+        m_controls.Ghost.Possess.performed += ctx => Possess();
     }
 
     public override void Move()
     {
-        Vector2 inputs = controls.General.Move.ReadValue<Vector2>();
-        Vector3 movement = new Vector3(inputs.x, Rb.velocity.y, inputs.y);
-        movement = (movement.z * transform.forward * Cdatas.MoveSpeed) + (movement.x * transform.right * Cdatas.MoveSpeed);
-        movement.y = controls.Ghost.GoUp.ReadValue<float>() - controls.Ghost.GoDown.ReadValue<float>();
-        movement.y *= Cdatas.MoveSpeed;
-        Rb.velocity = movement;
+        Vector2 inputs = m_controls.General.Move.ReadValue<Vector2>();
+        Vector3 movement = new Vector3(inputs.x, m_rbComp.velocity.y, inputs.y);
+        movement = (movement.z * transform.forward * m_characterData.MoveSpeed) + (movement.x * transform.right * m_characterData.MoveSpeed);
+        movement.y = m_controls.Ghost.GoUp.ReadValue<float>() - m_controls.Ghost.GoDown.ReadValue<float>();
+        movement.y *= m_characterData.MoveSpeed;
+        m_rbComp.velocity = movement;
     }
 
     private void Possess()
@@ -32,7 +32,7 @@ public class Ghost : Character
             furnituresTransform.Add(allFurnitures[i].transform);
         }
 
-        Transform nearestFurnitures = TransformUtility.GetNeareastObject(furnituresTransform, transform, Cdatas.range);
+        Transform nearestFurnitures = TransformUtility.GetNeareastObject(furnituresTransform, transform, m_characterData.range);
 
         if (nearestFurnitures != null)
         {

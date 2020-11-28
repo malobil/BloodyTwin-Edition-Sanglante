@@ -6,6 +6,8 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
+    private Dictionary<UIType, UIElement> m_UIList = new Dictionary<UIType, UIElement>() ;
+
     private void Awake()
     {
         if(Instance == null)
@@ -16,6 +18,8 @@ public class UIManager : MonoBehaviour
         {
             Destroy(this);
         }
+
+        Initialize();
     }
 
     // Start is called before the first frame update
@@ -29,14 +33,42 @@ public class UIManager : MonoBehaviour
     {
         
     }
-
-    public void SetupUI(UIElement uiToSetup)
+    
+    public void ShowUI(UIType typeToShow)
     {
-        uiToSetup.Initialize();
+        if(GetUI(typeToShow) != null)
+        {
+            GetUI(typeToShow).Show();
+        }
     }
 
-    public void HideUI(UIElement uiToHide)
+    public void UpdateUIFillAmount(UIType uiToUpdate, float currentValue)
     {
-        uiToHide.Deserialize();
+        if (GetUI(uiToUpdate) != null)
+        {
+            GetUI(uiToUpdate).UpdateFillAmount(currentValue);
+        }
+    }
+
+    private void Initialize()
+    {
+        for(int i = 0; i < transform.childCount -1; i++)
+        {
+            UIElement newUIElement = transform.GetChild(i).GetComponent<UIElement>();
+
+            if (newUIElement != null)
+            {
+                m_UIList.Add(newUIElement.AssociateType, newUIElement);
+            }
+        }
+    }
+
+    private UIElement GetUI(UIType uiToGet)
+    {
+        UIElement targetElement = null;
+
+        m_UIList.TryGetValue(uiToGet, out targetElement);
+
+        return targetElement;
     }
 }

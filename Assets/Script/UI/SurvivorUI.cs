@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SurvivorUI : UIElement
 {
-    public override void Initialize()
+    [SerializeField] private Image m_torchLight = null;
+
+    public override void UpdateFillAmount(float newValue)
     {
-        ShowChildUI(gameObject);
+        m_torchLight.fillAmount = newValue ;
     }
 }

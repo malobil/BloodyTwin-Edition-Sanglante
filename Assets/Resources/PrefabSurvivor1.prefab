@@ -314,9 +314,9 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 10
-  m_Range: 10
+  m_Range: 50
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -501,7 +501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f0ee86aaaee484ba8b8bf9889ffd1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cdatas: {fileID: 11400000, guid: 004c04bbe75c62c478165e2152637df5, type: 2}
+  m_characterData: {fileID: 11400000, guid: 004c04bbe75c62c478165e2152637df5, type: 2}
   m_Camera: {fileID: 6103306299193356885}
   m_CameraComp: {fileID: 7277008633481441665}
   m_lightTorch: {fileID: 7920673480726823511}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public enum CharacterType { Ghost, Killer, Survivor}
 
@@ -14,9 +15,28 @@ public class CharactersData : ScriptableObject
     public float range = 5f;
     public float ejectionForce = 10f ;
 
-    /// <summary>
-    /// Survivor datas
-    /// </summary>
-    public float lightTorchBatteryTime = 10f;
-    public float timeToFullyChargeUp = 5f;
+    public SurvivorData Survivor;
+    public KillerData Killer;
+    public GhostData Ghost;
+
+    
+}
+
+[Serializable]
+public class SurvivorData
+{
+    public float LightTorchBatteryTime = 10f;
+    public float TimeToFullyChargeUp = 5f;
+}
+
+[Serializable]
+public class KillerData
+{
+    public float KillerTest = 0;
+}
+
+[Serializable]
+public class GhostData
+{
+    public float GhostTest = 0;
 }
