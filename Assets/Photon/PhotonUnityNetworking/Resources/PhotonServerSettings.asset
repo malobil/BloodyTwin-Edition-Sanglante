@@ -44,6 +44,9 @@ MonoBehaviour:
   - RPC_TurnOffLight
   - RPC_TurnOnLight
   - RPC_UnPossess
+  - RPC_ToggleLight
+  - RPC_HideLight
+  - RPC_ShowLight
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

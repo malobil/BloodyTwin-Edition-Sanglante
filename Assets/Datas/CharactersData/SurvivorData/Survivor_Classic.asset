@@ -17,4 +17,11 @@ MonoBehaviour:
   CameraSensitivity: 5
   range: 5
   ejectionForce: 10
-  lightTorchBatteryTime: 10
+  Survivor:
+    LightTorchBatteryTime: 10
+    TorchLightDecreaseRatio: 0.5
+    TorchLightIncreaseRatio: 0.8
+  Killer:
+    KillerTest: 0
+  Ghost:
+    GhostTest: 0

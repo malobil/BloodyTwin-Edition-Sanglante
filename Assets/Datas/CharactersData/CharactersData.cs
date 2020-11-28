@@ -26,7 +26,8 @@ public class CharactersData : ScriptableObject
 public class SurvivorData
 {
     public float LightTorchBatteryTime = 10f;
-    public float TimeToFullyChargeUp = 5f;
+    public float TorchLightDecreaseRatio = 0.5f;
+    public float TorchLightIncreaseRatio = 0.8f;
 }
 
 [Serializable]
