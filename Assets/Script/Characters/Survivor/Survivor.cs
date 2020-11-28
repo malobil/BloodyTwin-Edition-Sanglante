@@ -1,6 +1,4 @@
 ﻿using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Survivor : Character
@@ -37,10 +35,10 @@ public class Survivor : Character
 
     void DecreaseTorchBattery()
     {
-        if(m_lightTorch.activeSelf)
+        if (m_lightTorch.activeSelf)
         {
             m_currentTorchLightBattery -= Time.deltaTime * 2f;
-            UIManager.Instance.UpdateUIFillAmount(UIType.Survivor, m_currentTorchLightBattery/m_characterData.Survivor.LightTorchBatteryTime);
+            UIManager.Instance.UpdateUIFillAmount(UIType.Survivor, m_currentTorchLightBattery / m_characterData.Survivor.LightTorchBatteryTime);
         }
     }
 
@@ -51,26 +49,16 @@ public class Survivor : Character
         {
             if (m_lightTorch.activeSelf)
             {
-                TurnOffLight();
+                GameObjectUtility.HideGameObject(m_lightTorch);
             }
             else
             {
-                TurnOnLight();
+                GameObjectUtility.ShowGameObject(m_lightTorch);
             }
         }
         else
         {
             //Le moment ou le joueur n'a plus de batterie
         }
-    }
-
-    void TurnOnLight()
-    {
-        GameObjectUtility.ShowGameObject(m_lightTorch);
-    }
-
-    void TurnOffLight()
-    {
-        GameObjectUtility.HideGameObject(m_lightTorch);
     }
 }

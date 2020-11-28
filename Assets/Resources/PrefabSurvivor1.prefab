@@ -378,6 +378,7 @@ GameObject:
   - component: {fileID: 6689644131080586591}
   - component: {fileID: 8443596703242502142}
   - component: {fileID: 6266541138040725649}
+  - component: {fileID: 3824082888071569109}
   m_Layer: 0
   m_Name: PrefabSurvivor1
   m_TagString: Untagged
@@ -504,4 +505,20 @@ MonoBehaviour:
   m_characterData: {fileID: 11400000, guid: 004c04bbe75c62c478165e2152637df5, type: 2}
   m_Camera: {fileID: 6103306299193356885}
   m_CameraComp: {fileID: 7277008633481441665}
+  m_AudioListComp: {fileID: 5477744665910171727}
   m_lightTorch: {fileID: 7920673480726823511}
+--- !u!114 &3824082888071569109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8490453812604947920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0

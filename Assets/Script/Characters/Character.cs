@@ -5,9 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class Character : MonoBehaviourPun
 {
-    [SerializeField] protected CharactersData m_characterData;
-    [SerializeField] protected Transform m_Camera;
-    [SerializeField] protected Camera m_CameraComp;
+    [SerializeField] protected CharactersData m_characterData = null ;
+    [SerializeField] protected Transform m_Camera = null ;
+    [SerializeField] protected Camera m_CameraComp = null ;
+    [SerializeField] protected AudioListener m_AudioListComp = null ;
 
     protected GameControls m_controls;
     protected Rigidbody m_rbComp;
@@ -31,7 +32,8 @@ public abstract class Character : MonoBehaviourPun
     {
         if (!photonView.IsMine)
         {
-            m_CameraComp.gameObject.SetActive(false);
+            m_CameraComp.enabled = false;
+            m_AudioListComp.enabled = false;
             this.enabled = false;
             return;
         }
