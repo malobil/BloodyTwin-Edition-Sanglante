@@ -378,6 +378,7 @@ MonoBehaviour:
   m_characterData: {fileID: 11400000, guid: d24799ece27a44b41a085aac358dc343, type: 2}
   m_Camera: {fileID: 8836833336041678018}
   m_CameraComp: {fileID: 2907891868458701400}
+  m_AudioListComp: {fileID: 513234586933557814}
 --- !u!114 &3353315202490161095
 MonoBehaviour:
   m_ObjectHideFlags: 0
