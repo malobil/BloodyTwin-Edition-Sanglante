@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4440538695251354852}
   - component: {fileID: 2545225980311769839}
   - component: {fileID: 9185829838344566494}
+  - component: {fileID: 7640628208033500964}
   m_Layer: 0
   m_Name: Model 0
   m_TagString: Untagged
@@ -79,6 +80,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2513723719533265701}
   m_Mesh: {fileID: -5984132567002643438}
+--- !u!65 &7640628208033500964
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2513723719533265701}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 0.3, z: 4}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7063973531098341829
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2178891861995341333}
   m_Layer: 0
-  m_Name: 2ndFloorBathroomGround1
+  m_Name: 1stFloorBathroomCeiling1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

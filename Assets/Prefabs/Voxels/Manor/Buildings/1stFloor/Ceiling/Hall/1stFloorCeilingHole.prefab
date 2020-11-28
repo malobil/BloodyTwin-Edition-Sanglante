@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4848643987747074547}
   m_Layer: 0
-  m_Name: 2ndFloorGroundHole
+  m_Name: 1stFloorCeilingHole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 917020156811146700}
   - component: {fileID: 8177750629929601048}
   - component: {fileID: 978282862685007103}
+  - component: {fileID: 902221858471961869}
   m_Layer: 0
   m_Name: Model 0
   m_TagString: Untagged
@@ -109,6 +110,20 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2765673910675420775}
+  m_Mesh: {fileID: -6828719583684952657}
+--- !u!64 &902221858471961869
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2765673910675420775}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
   m_Mesh: {fileID: -6828719583684952657}
 --- !u!43 &-6828719583684952657
 Mesh:
