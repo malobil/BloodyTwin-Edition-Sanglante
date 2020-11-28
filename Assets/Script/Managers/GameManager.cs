@@ -43,7 +43,6 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunOwnershipCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        PhotonNetwork.AllocateViewID(photonView);
         SpawnDoll();
         SpawnCharacter(PhotonNetwork.LocalPlayer);
     }

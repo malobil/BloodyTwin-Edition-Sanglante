@@ -39,22 +39,10 @@ public class Ghost : Character
             transform.position = nearestFurnitures.position;
             GameObjectUtility.HideGameObject(gameObject);
             nearestFurnitures.GetComponent<Furnitures>().Possess(this, m_Camera);
-            photonView.RPC("RPC_HideMe", RpcTarget.All);
             DisableControls();
         }
     }
 
-    [PunRPC]
-    void RPC_ShowMe()
-    {
-        GameObjectUtility.ShowGameObject(gameObject);
-    }
-
-    [PunRPC]
-    void RPC_HideMe()
-    {
-        GameObjectUtility.HideGameObject(gameObject);
-    }
 
     public void UnPossess(Furnitures unpossedObj)
     {
@@ -63,7 +51,6 @@ public class Ghost : Character
         m_Camera.position = transform.position;
         m_Camera.SetParent(transform);
         GameObjectUtility.ShowGameObject(gameObject);
-        photonView.RPC("RPC_ShowMe", RpcTarget.All);
         EnableControls();
     }
 }

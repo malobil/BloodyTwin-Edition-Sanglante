@@ -36,14 +36,14 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
+  - RPC_AddDoll
   - RPC_HideMe
   - RPC_Possess
+  - RPC_RemoveDoll
   - RPC_ShowMe
   - RPC_TurnOffLight
   - RPC_TurnOnLight
   - RPC_UnPossess
-  - RPC_AddDoll
-  - RPC_RemoveDoll
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
