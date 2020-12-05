@@ -215,6 +215,14 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""ba43dba0-c341-438e-94d5-8a706faceb02"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -250,6 +258,17 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""187c654a-f23e-477d-a9a2-6ac292a71d35"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -271,6 +290,7 @@ public class @GameControls : IInputActionCollection, IDisposable
         m_Survivor_ToggleLightTorch = m_Survivor.FindAction("ToggleLightTorch", throwIfNotFound: true);
         m_Survivor_ChargeUpLightTorch = m_Survivor.FindAction("ChargeUpLightTorch", throwIfNotFound: true);
         m_Survivor_Interact = m_Survivor.FindAction("Interact", throwIfNotFound: true);
+        m_Survivor_Sprint = m_Survivor.FindAction("Sprint", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -421,6 +441,7 @@ public class @GameControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Survivor_ToggleLightTorch;
     private readonly InputAction m_Survivor_ChargeUpLightTorch;
     private readonly InputAction m_Survivor_Interact;
+    private readonly InputAction m_Survivor_Sprint;
     public struct SurvivorActions
     {
         private @GameControls m_Wrapper;
@@ -428,6 +449,7 @@ public class @GameControls : IInputActionCollection, IDisposable
         public InputAction @ToggleLightTorch => m_Wrapper.m_Survivor_ToggleLightTorch;
         public InputAction @ChargeUpLightTorch => m_Wrapper.m_Survivor_ChargeUpLightTorch;
         public InputAction @Interact => m_Wrapper.m_Survivor_Interact;
+        public InputAction @Sprint => m_Wrapper.m_Survivor_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_Survivor; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -446,6 +468,9 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_SurvivorActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_SurvivorActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_SurvivorActionsCallbackInterface.OnInteract;
+                @Sprint.started -= m_Wrapper.m_SurvivorActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_SurvivorActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_SurvivorActionsCallbackInterface.OnSprint;
             }
             m_Wrapper.m_SurvivorActionsCallbackInterface = instance;
             if (instance != null)
@@ -459,6 +484,9 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
             }
         }
     }
@@ -480,5 +508,6 @@ public class @GameControls : IInputActionCollection, IDisposable
         void OnToggleLightTorch(InputAction.CallbackContext context);
         void OnChargeUpLightTorch(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
     }
 }

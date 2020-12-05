@@ -1,4 +1,5 @@
 ﻿using Photon.Pun;
+using System.Collections;
 using UnityEngine;
 
 public class Survivor : Character
@@ -7,8 +8,14 @@ public class Survivor : Character
 
     private bool m_canUseTorchLight = true;
     private bool m_isChargingTorchLight = false;
+    private bool m_isSprinting = false;
+    private bool m_canSprint = true;
+    private bool m_isTired = false;
 
     private float m_currentTorchLightBattery = 0f;
+    private float m_currentSprintLeftDuration = 0f;
+
+    private SurvivorUI m_survivorUI;
 
     public override void OnInit()
     {
@@ -19,8 +26,11 @@ public class Survivor : Character
             return;
         }
 
-        UIManager.Instance.ShowUI(UIType.Survivor);
         m_currentTorchLightBattery = m_characterData.Survivor.LightTorchBatteryTime;
+        m_currentSprintLeftDuration = m_characterData.Survivor.SprintMaxDuration;
+
+        m_survivorUI = UIManager.Instance.GetUI(UIType.Survivor) as SurvivorUI;
+        m_survivorUI.Show();
     }
 
     public override void OnUpdate()
@@ -28,6 +38,7 @@ public class Survivor : Character
         base.OnUpdate();
         DecreaseTorchBattery();
         ChargeUpTorchBattery();
+        UpdateSprintDuration();
     }
 
     public override void SetupControls()
@@ -37,6 +48,8 @@ public class Survivor : Character
         m_controls.Survivor.ChargeUpLightTorch.performed += ctx => BeginChargeUpTorch();
         m_controls.Survivor.ChargeUpLightTorch.canceled += ctx => EndChargeUpTorch();
         m_controls.Survivor.Interact.performed += ctx => Interact();
+        m_controls.Survivor.Sprint.performed += ctx => StartSprint();
+        m_controls.Survivor.Sprint.canceled += ctx => StopSprint();
     }
 
     void DecreaseTorchBattery()
@@ -44,7 +57,7 @@ public class Survivor : Character
         if (m_lightTorch.activeSelf)
         {
             m_currentTorchLightBattery -= Time.deltaTime * m_characterData.Survivor.TorchLightDecreaseRatio;
-            UIManager.Instance.UpdateUIFillAmount(UIType.Survivor, m_currentTorchLightBattery / m_characterData.Survivor.LightTorchBatteryTime);
+            m_survivorUI.UpdateFillAmount(m_survivorUI.TorchLightUI, m_currentTorchLightBattery / m_characterData.Survivor.LightTorchBatteryTime);
 
             if (m_currentTorchLightBattery <= 0)
             {
@@ -71,7 +84,7 @@ public class Survivor : Character
             if (m_currentTorchLightBattery < m_characterData.Survivor.LightTorchBatteryTime)
             {
                 m_currentTorchLightBattery += Time.deltaTime * m_characterData.Survivor.TorchLightIncreaseRatio;
-                UIManager.Instance.UpdateUIFillAmount(UIType.Survivor, m_currentTorchLightBattery / m_characterData.Survivor.LightTorchBatteryTime);
+                m_survivorUI.UpdateFillAmount(m_survivorUI.TorchLightUI, m_currentTorchLightBattery / m_characterData.Survivor.LightTorchBatteryTime);
                 m_canUseTorchLight = true;
             }
         }
@@ -94,6 +107,57 @@ public class Survivor : Character
         {
             //Le moment ou le joueur n'a plus de batterie
         }
+    }
+
+    private void UpdateSprintDuration()
+    {
+        if(m_isSprinting)
+        {
+            m_currentSprintLeftDuration -= Time.deltaTime * m_characterData.Survivor.SprintDecreaseRatio;
+            m_survivorUI.UpdateFillAmount(m_survivorUI.SprintUI, m_currentSprintLeftDuration / m_characterData.Survivor.SprintMaxDuration);
+
+            if(m_currentSprintLeftDuration <= 0)
+            {
+                StopSprint();
+                m_currentSprintLeftDuration = 0f;
+                m_canSprint = false;
+                m_isTired = true;
+            }
+        }
+        else
+        {
+            if(m_currentSprintLeftDuration < m_characterData.Survivor.SprintMaxDuration)
+            {
+                m_currentSprintLeftDuration += Time.deltaTime * m_characterData.Survivor.SprintIncreaseRatio;
+                m_survivorUI.UpdateFillAmount(m_survivorUI.SprintUI, m_currentSprintLeftDuration / m_characterData.Survivor.SprintMaxDuration);
+            }
+            else
+            {
+                m_currentSprintLeftDuration = m_characterData.Survivor.SprintMaxDuration;
+
+                if(m_isTired)
+                {
+                    m_isTired = false;
+                    m_canSprint = true;
+                }
+            }
+            
+        }
+    }
+
+    private void StartSprint()
+    {
+        if(m_canSprint)
+        {
+            m_currentMoveSpeed = m_characterData.Survivor.SprintMoveSpeed;
+            m_isSprinting = true;
+        }
+    }
+
+    private void StopSprint()
+    {
+        m_currentMoveSpeed = m_characterData.MoveSpeed;
+        m_isSprinting = false;
     }
 
     [PunRPC]

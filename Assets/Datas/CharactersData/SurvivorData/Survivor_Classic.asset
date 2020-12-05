@@ -14,13 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataType: 0
   MoveSpeed: 5
-  CameraSensitivity: 5
+  CameraSensitivity: 0.5
   range: 5
   ejectionForce: 10
   Survivor:
     LightTorchBatteryTime: 10
     TorchLightDecreaseRatio: 0.5
     TorchLightIncreaseRatio: 0.8
+    SprintMoveSpeed: 7
+    SprintMaxDuration: 10
+    SprintDecreaseRatio: 1
+    SprintIncreaseRatio: 1
   Killer:
     KillerTest: 0
   Ghost:

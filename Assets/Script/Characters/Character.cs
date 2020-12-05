@@ -16,6 +16,8 @@ public abstract class Character : MonoBehaviourPun
     protected float m_xCameraRotation;
     protected PhotonView m_photonView;
 
+    protected float m_currentMoveSpeed = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +44,7 @@ public abstract class Character : MonoBehaviourPun
         m_rbComp = GetComponent<Rigidbody>();
         m_photonView = GetComponent<PhotonView>();
         SetupControls();
+        m_currentMoveSpeed = m_characterData.MoveSpeed;
     }
 
     public virtual void OnUpdate()
@@ -70,7 +73,7 @@ public abstract class Character : MonoBehaviourPun
     {
         Vector2 inputs = m_controls.General.Move.ReadValue<Vector2>();
         Vector3 movement = new Vector3(inputs.x, 0f, inputs.y);
-        movement = (movement.z * transform.forward * m_characterData.MoveSpeed) + (movement.x * transform.right * m_characterData.MoveSpeed);
+        movement = (movement.z * transform.forward * m_currentMoveSpeed) + (movement.x * transform.right * m_currentMoveSpeed);
         movement.y = m_rbComp.velocity.y;
         m_rbComp.velocity = movement;
     }

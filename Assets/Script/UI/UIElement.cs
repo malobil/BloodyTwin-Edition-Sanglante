@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum UIType { Survivor}
 
@@ -21,9 +22,9 @@ public abstract class UIElement : MonoBehaviour
 
     }
 
-    public virtual void UpdateFillAmount(float newValue)
+    public virtual void UpdateFillAmount(Image targetUI, float newValue)
     {
-
+        targetUI.fillAmount = newValue;
     }
 
     public virtual void Show()

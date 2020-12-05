@@ -42,14 +42,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void UpdateUIFillAmount(UIType uiToUpdate, float currentValue)
-    {
-        if (GetUI(uiToUpdate) != null)
-        {
-            GetUI(uiToUpdate).UpdateFillAmount(currentValue);
-        }
-    }
-
     private void Initialize()
     {
         for(int i = 0; i < transform.childCount -1; i++)
@@ -63,7 +55,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private UIElement GetUI(UIType uiToGet)
+    public UIElement GetUI(UIType uiToGet)
     {
         UIElement targetElement = null;
 

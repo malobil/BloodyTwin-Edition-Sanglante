@@ -6,9 +6,8 @@ using UnityEngine.UI;
 public class SurvivorUI : UIElement
 {
     [SerializeField] private Image m_torchLight = null;
+    [SerializeField] private Image m_sprint = null;
 
-    public override void UpdateFillAmount(float newValue)
-    {
-        m_torchLight.fillAmount = newValue ;
-    }
+    public Image TorchLightUI { get => m_torchLight; }
+    public Image SprintUI { get => m_sprint; }
 }

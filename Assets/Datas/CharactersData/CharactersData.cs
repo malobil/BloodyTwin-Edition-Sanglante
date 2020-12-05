@@ -28,6 +28,11 @@ public class SurvivorData
     public float LightTorchBatteryTime = 10f;
     public float TorchLightDecreaseRatio = 0.5f;
     public float TorchLightIncreaseRatio = 0.8f;
+
+    public float SprintMoveSpeed = 10f;
+    public float SprintMaxDuration = 10f;
+    public float SprintDecreaseRatio = 1f;
+    public float SprintIncreaseRatio = 1f;
 }
 
 [Serializable]
