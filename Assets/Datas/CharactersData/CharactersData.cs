@@ -33,6 +33,7 @@ public class SurvivorData
     public float SprintMaxDuration = 10f;
     public float SprintDecreaseRatio = 1f;
     public float SprintIncreaseRatio = 1f;
+    public float TiredMoveSpeed = 3f;
 }
 
 [Serializable]

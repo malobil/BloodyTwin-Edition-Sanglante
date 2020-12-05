@@ -21,10 +21,11 @@ MonoBehaviour:
     LightTorchBatteryTime: 10
     TorchLightDecreaseRatio: 0.5
     TorchLightIncreaseRatio: 0.8
-    SprintMoveSpeed: 7
+    SprintMoveSpeed: 8
     SprintMaxDuration: 10
-    SprintDecreaseRatio: 1
+    SprintDecreaseRatio: 3
     SprintIncreaseRatio: 1
+    TiredMoveSpeed: 2
   Killer:
     KillerTest: 0
   Ghost:

@@ -120,8 +120,7 @@ public class Survivor : Character
             {
                 StopSprint();
                 m_currentSprintLeftDuration = 0f;
-                m_canSprint = false;
-                m_isTired = true;
+                Tired();
             }
         }
         else
@@ -137,8 +136,7 @@ public class Survivor : Character
 
                 if(m_isTired)
                 {
-                    m_isTired = false;
-                    m_canSprint = true;
+                    StopTired();
                 }
             }
             
@@ -156,8 +154,26 @@ public class Survivor : Character
 
     private void StopSprint()
     {
-        m_currentMoveSpeed = m_characterData.MoveSpeed;
+        if(!m_isTired)
+        {
+            m_currentMoveSpeed = m_characterData.MoveSpeed;
+        }
+
         m_isSprinting = false;
+    }
+
+    private void Tired()
+    {
+        m_canSprint = false;
+        m_isTired = true;
+        m_currentMoveSpeed = m_characterData.Survivor.TiredMoveSpeed;
+    }
+
+    private void StopTired()
+    {
+        m_canSprint = true;
+        m_isTired = false;
+        m_currentMoveSpeed = m_characterData.MoveSpeed;
     }
 
     [PunRPC]
